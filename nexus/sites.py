@@ -1,12 +1,13 @@
 # Core site concept heavily inspired by django.contrib.sites
 
+from collections import OrderedDict
+
 from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotModified, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.utils.datastructures import SortedDict
 from django.utils.http import http_date
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -58,7 +59,7 @@ except ImportError:  # must be < Django 1.3
 class NexusSite(object):
     def __init__(self, name=None, app_name='nexus'):
         self._registry = {}
-        self._categories = SortedDict()
+        self._categories = OrderedDict()
         if name is None:
             self.name = 'nexus'
         else:
