@@ -40,6 +40,7 @@ def make_nexus_model_admin(model_admin):
             else:
                 extra_context.update(self.admin_site.get_context(request))
             
+            extra_context['app_label'] = app_label
             del extra_context['title']
             return super(NexusModelAdmin, self).changelist_view(request, extra_context)
 
@@ -75,7 +76,7 @@ def make_nexus_model_admin(model_admin):
                 extra_context = self.admin_site.get_context(request)
             else:
                 extra_context.update(self.admin_site.get_context(request))
-            
+            extra_context['app_label'] = app_label
             del extra_context['title']
             return super(NexusModelAdmin, self).history_view(request, object_id, extra_context)
     return NexusModelAdmin
